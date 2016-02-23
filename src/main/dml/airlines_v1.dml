@@ -1,0 +1,52 @@
+package pt.tecnico.airlines_v1.domain;
+
+class Manager;
+
+class Flight {
+	int is;
+	String departure;
+	String arrival;
+	LocalTime time;
+}
+
+class Airport {
+	String iata;
+	String icao;
+	String city;
+	int flightCoast;
+}
+
+class Airline {
+	String name;
+	String iata;
+}
+
+relation ManagerContainsAirlines {
+	Manager playsRole manager;
+	Airline playsRole airline {
+		multiplicity *;
+	}
+}
+
+relation AirlineContainsFlights {
+	Airline playsRole airline;
+	Flight playsRole flight {
+		multiplicity *;
+	}
+}
+
+relation AirportContainsFlights {
+	Airport playsRole airport;
+	Flight playsRole flight {
+		multiplicity *;
+	}
+}
+
+relation DomainRootHasAirlinesApplication {
+  .pt.ist.fenixframework.DomainRoot playsRole root {
+    multiplicity 0..1;
+  }
+  Manager playsRole manager {
+    multiplicity 0..1;
+  }
+}
